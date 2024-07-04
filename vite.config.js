@@ -4,6 +4,11 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    port: 3001,
+    open: true, // Automatically open the app in the browser
+    host: 'localhost', // Change this to your desired port
+  },
   optimizeDeps: {
     exclude: [
       // Add the dependencies causing issues here
@@ -14,7 +19,7 @@ export default defineConfig({
     ],
   },
   define: {
-    "process.env": process.env,
+    "process.env": {}//process.env,
   },
   resolve: {
     alias: {

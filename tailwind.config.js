@@ -1,10 +1,120 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
-    "./src/**/*.{html,js,jsx,ts,tsx}", // Adjust paths based on your project structure
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
+  prefix: "",
   theme: {
-    extend: {},
+    container: {
+      center: true,
+      padding: "2rem",
+    },
+    extend: {
+      backgroundImage: {
+        "blue-gradient":
+          "linear-gradient(90deg, rgba(255,0,150,1) 0%, rgba(0,204,255,1) 100%)",
+      },
+      colors: {
+        dark: "#030014",
+        neutrals: {
+          1: "#FFFFFF",
+          2: "#fcfcfd",
+          3: "#f5f5f6",
+          4: "#f0f0f1",
+          5: "#D9D9DC",
+          6: "#C0BFC4",
+          7: "#8E8C95",
+          8: "#5B5966",
+          9: "#474553",
+          10: "#292637",
+          11: "#211F30",
+          12: "#171427",
+          13: "#030014",
+        },
+        washedPurple: {
+          50: "#f8f7ff",
+          100: "#e8e7ff",
+          200: "#dddcff",
+          300: "#cdcbff",
+          400: "#c4c1ff",
+          500: "#b5b2ff",
+          600: "#a5a2e8",
+          700: "#817eb5",
+          800: "#64628c",
+          900: "#4c4b6b",
+        },
+        washedBlue: {
+          50: "#f0f3ff",
+          100: "#d0daff",
+          200: "#bac9ff",
+          300: "#9ab0ff",
+          400: "#86a1ff",
+          500: "#6889ff",
+          600: "#5f7de8",
+          700: "#4a61b5",
+          800: "#394b8c",
+          900: "#2c3a6b",
+        },
+        primaryBlue: {
+          50: "#e6f0ff",
+          100: "#b1d1ff",
+          200: "#8cbaff",
+          300: "#579bff",
+          400: "#3687ff",
+          500: "#0469ff",
+          600: "#0460e8",
+          700: "#034bb5",
+          800: "#023a8c",
+          900: "#022c6b",
+        },
+        primaryPurple: {
+          50: "#f1e6ff",
+          100: "#d3b0ff",
+          200: "#bd8aff",
+          300: "#9f54ff",
+          400: "#8d33ff",
+          500: "#7000ff",
+          600: "#6600e8",
+          700: "#5000b5",
+          800: "#3e008c",
+          900: "#2f006b",
+        },
+
+        slate: {
+          800: "#1F2937",
+        },
+      },
+      borderRadius: {
+        lg: "10px",
+        md: "5px",
+        sm: "2px",
+      },
+      screens: {
+        xs: "300px",
+        sm: "700px",
+        md: "768px",
+        lg: "992px",
+        xl: "1650px",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
-  plugins: [],
-}
+  plugins: [require("tailwindcss-animate")],
+};
