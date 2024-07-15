@@ -229,8 +229,8 @@ const Dashboard = () => {
       winRate,
     });
 
-    console.log("Opening JournalModal for date:", date);
-    console.log("Journal entries for date:", getJournalEntries(date));
+    // console.log("Opening JournalModal for date:", date);
+    // console.log("Journal entries for date:", getJournalEntries(date));
   };
 
   const handleClose = () => {
@@ -238,20 +238,20 @@ const Dashboard = () => {
   };
 
   const handleSave = (date, entries) => {
-    console.log("Saving entries for date:", date, entries); // Debugging log
+    // console.log("Saving entries for date:", date, entries); // Debugging log
     setJournalEntries((prevEntries) => ({
       ...prevEntries,
       [date.toDateString()]: entries,
     }));
 
-    console.log("Journal Entries after save:", {
+    /* console.log("Journal Entries after save:", {
       ...journalEntries,
       [date.toDateString()]: entries,
-    }); // Debugging log
+    }); */ // Debugging log
     setIsModalOpen(false);
   };
 
-  console.log("Journal Entries:", getJournalEntries(selectedDate));
+  // console.log("Journal Entries:", getJournalEntries(selectedDate));
 
   return (
     <div className="flex">

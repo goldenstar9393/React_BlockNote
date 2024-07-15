@@ -27,7 +27,7 @@ const getRandomName = () => getRandomElement(names);
 const JournalEditor = ({ journalEntry, onChange }) => {
   const editor = useCreateBlockNote({
     initialContent: journalEntry,
-    collaboration: {
+    /* collaboration: {
       // The Yjs Provider responsible for transporting updates:
       provider,
       // Where to store BlockNote data in the Y.Doc:
@@ -37,16 +37,16 @@ const JournalEditor = ({ journalEntry, onChange }) => {
         name: getRandomName(),
         color: getRandomColor(),
       },
-    },
+    }, */
   });
-  // console.log("Editor", editor);
   const handleEditorChange = () => {
     const updatedBlocks = editor.document;
     onChange(updatedBlocks);
   };
 
   useEffect(() => {
-    console.log("JournalEditor received journalEntry:", journalEntry);
+    // console.log("JournalEditor received journalEntry:", journalEntry);
+    // console.log("JournalEditor editor:", editor.document);
   }, [journalEntry]);
 
   return (

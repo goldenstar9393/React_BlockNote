@@ -17,53 +17,52 @@ const JournalModal = ({
   onSave,
   stats,
 }) => {
+
   const [entries, setEntries] = useState([]);
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const entriesRef = useRef(entries);
 
   useEffect(() => {
-    console.log("JournalModal render for date:", selectedDate);
     if (isOpen) {
       const initialEntries = journalEntries.length
         ? journalEntries
         : [
-            {
-              date: selectedDate,
-              type: "dailySummary",
-              blocks: [
-                {
-                  type: "paragraph",
-                  content: [
-                    {
-                      type: "text",
-                      text: "",
-                      styles: {},
-                    },
-                  ],
-                },
-              ],
-              tags: [],
-            },
-            ...trades.map((trade) => ({
-              date: selectedDate,
-              type: "trade",
-              blocks: [
-                {
-                  type: "paragraph",
-                  content: [
-                    {
-                      type: "text",
-                      text: "",
-                      styles: {},
-                    },
-                  ],
-                },
-              ],
-              tags: [],
-              trade,
-            })),
-          ];
-      console.log("Initial Entries:", initialEntries); // Debugging log
+          {
+            date: selectedDate,
+            type: "dailySummary",
+            blocks: [
+              {
+                type: "paragraph",
+                content: [
+                  {
+                    type: "text",
+                    text: "",
+                    styles: {},
+                  },
+                ],
+              },
+            ],
+            tags: [],
+          },
+          ...trades.map((trade) => ({
+            date: selectedDate,
+            type: "trade",
+            blocks: [
+              {
+                type: "paragraph",
+                content: [
+                  {
+                    type: "text",
+                    text: "",
+                    styles: {},
+                  },
+                ],
+              },
+            ],
+            tags: [],
+            trade,
+          })),
+        ];
       setEntries(initialEntries);
       entriesRef.current = initialEntries;
       setSelectedTabIndex(0);
@@ -72,13 +71,13 @@ const JournalModal = ({
 
   useEffect(() => {
     console.log("Entries updated:", entries);
+    // setEntries(entries);
   }, [entries]);
 
   const handleContentChange = (updatedBlocks) => {
     const updatedEntries = entriesRef.current.map((entry, index) =>
       index === selectedTabIndex ? { ...entry, blocks: updatedBlocks } : entry
     );
-    console.log("Updated Entries:", updatedEntries); // Debugging log
     setEntries(updatedEntries);
     entriesRef.current = updatedEntries;
   };
@@ -108,10 +107,7 @@ const JournalModal = ({
   };
 
   if (!isOpen) return null;
-
   const selectedEntry = entries[selectedTabIndex] || {};
-  console.log("Selected Entry:", selectedEntry); // Debugging
-
   return ReactDOM.createPortal(
     <div
       className="fixed inset-0 top-0 left-0 bg-dark bg-opacity-80 h-full flex justify-center items-center"
@@ -158,11 +154,10 @@ const JournalModal = ({
             <button
               key={index}
               onClick={() => handleTabSelect(index)}
-              className={`${
-                selectedTabIndex === index
-                  ? "bg-washedPurple-500 bg-opacity-20"
-                  : "bg-washedPurple-500 bg-opacity-10"
-              } bg-transparent rounded-bl-lg rounded-br-lg mx-1 px-4 py-2 cursor-pointer text-washedPurple-500`}
+              className={`${selectedTabIndex === index
+                ? "bg-washedPurple-500 bg-opacity-20"
+                : "bg-washedPurple-500 bg-opacity-10"
+                } bg-transparent rounded-bl-lg rounded-br-lg mx-1 px-4 py-2 cursor-pointer text-washedPurple-500`}
             >
               {entry.type === "dailySummary"
                 ? "Daily Summary"
@@ -192,20 +187,14 @@ const JournalModal = ({
         </div>
 
         <div className="flex flex-col items-center justify-between w-full h-3/4 my-5">
-          <JournalEditor
-            key={selectedTabIndex}
-            journalEntry={
-              selectedEntry.blocks && selectedEntry.blocks.length
-                ? selectedEntry.blocks
-                : [
-                    {
-                      type: "paragraph",
-                      content: [{ type: "text", text: "", styles: {} }],
-                    },
-                  ]
-            }
-            onChange={handleContentChange}
-          />
+          {selectedEntry?.blocks && selectedEntry?.blocks.length &&
+            <JournalEditor
+              key={selectedTabIndex}
+              journalEntry={
+                selectedEntry?.blocks
+              }
+              onChange={handleContentChange}
+            />}
         </div>
       </div>
     </div>,
